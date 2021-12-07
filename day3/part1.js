@@ -1,17 +1,24 @@
 let list = require('./day3Data.js').split('\n');
 
-let onesCount = new Array(12).fill(0);
-let zeroesCount = new Array(12).fill(0);
+const getBitCounts = (list) => {
+  let onesCount = new Array(12).fill(0);
+  let zeroesCount = new Array(12).fill(0);
 
-list.forEach((report) => {
-  for(let i = 0; i < report.length; i ++){
-    if(report[i] === '1') {
-      onesCount[i] ++;
-    } else {
-      zeroesCount[i] ++;
+  list.forEach((report) => {
+    for(let i = 0; i < report.length; i ++){
+      if(report[i] === '1') {
+        onesCount[i] ++;
+      } else {
+        zeroesCount[i] ++;
+      }
     }
-  }
-})
+  });
+
+  return [onesCount, zeroesCount];
+}
+const count = getBitCounts(list);
+const onesCount = count[0];
+const zeroesCount = count[1];
 let gamma = [];
 let epsilon = [];
 for(let i = 0; i < onesCount.length; i ++) {
@@ -26,6 +33,7 @@ for(let i = 0; i < onesCount.length; i ++) {
 gamma = parseInt(gamma.join(''), 2);
 epsilon = parseInt(epsilon.join(''), 2);
 
-console.log(gamma, epsilon);
-console.log(gamma * epsilon);
+// console.log(gamma, epsilon);
+// console.log(gamma * epsilon);
 
+module.exports = getBitCounts;
